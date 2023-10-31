@@ -1,0 +1,27 @@
+[package]
+name = "rpress"
+authors = ["liboq<2661158759@qq.com>"]
+version = "0.1.4"
+edition = "2021"
+description = "repressis a generator of sites, writen in Rust"
+readme = "README.md"
+license = "MIT"
+keywords = ["static-site-generator"]
+repository = "https://github.com/liboq/rpress"
+homepage = "https://github.com/liboq/rpress"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tera = {version = "1.19.0", features = ["builtins"]}
+colored = "2.0.4"
+percent-encoding = "2.3.0"
+walkdir = "2.3.3"
+anyhow = "1.0.72"
+serde = { version = "1.0.171", features = ["derive"] }
+toml = "0.8.5"
+clap = { version = "4.3.21", features = ["derive"] }
+warp = "0.3.6"
+tokio = { version = "1.33.0", features = ["full"] }
+prettytable-rs = "0.10.0"
+markdown = "1.0.0-alpha.14"
