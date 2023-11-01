@@ -1,13 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="w-[100rem]">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>27</title>
+    <link rel="stylesheet" href="../css/pico.min.css">
+    </link>
+
+
 </head>
+
 <body>
-    <div>
-        <h2>起因</h2>
+    <nav>
+        <ul>
+            <li><a href="/dist/index">首页</a></li>
+            <li>
+                <details role="list">
+                    <summary aria-haspopup="listbox" role="button">
+                        文章
+                    </summary>
+                    <ul role="listbox">
+                        <li><a href="/dist/tag">标签</a></li>
+                        <li><a href="/dist/category">类型</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li><a href="/dist/about">关于</a></li>
+        </ul>
+        <ul>
+            <li><a href="/dist/friend">友链</a></li>
+        </ul>
+    </nav>
+    <main id="container">
+        <header>
+            <h1 align="center" id="27">27</h1>
+            <p align="center">
+                <small>
+                    <span>1979-05-27 |</span>
+                </small>
+                <a href="/dist/category">生活琐碎 |</a>
+                
+                <a href="/dist/tag">杂谈</a>
+                
+            </p>
+        </header>
+        <article>
+            <h2>起因</h2>
 <p>在做自己博客网站的时候，需要做一个根据页面内容来显示标题导航的功能，例如根据 h1,h2,h3 来导航文章内容，文章内容变化标题导航的 menu 的 active 类也会切换，所以我就想做一个相关的库，方便有相同需求的朋友。</p>
 <h2>如何实现</h2>
 <h3>获取 menu</h3>
@@ -146,6 +185,8 @@ onMounted(() =&gt; {
 </code></pre>
 <p>下面是我的 github 仓库<a href="https://github.com/Liboq/markdown-it-navbar">markdwon-it-navbar</a>,欢迎 jym 给我提 issues🤓</p>
 
-    </div>
+        </article>
+    </main>
 </body>
+
 </html>

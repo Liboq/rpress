@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" class="w-[100rem]">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{props.title}}</title>
+    <link rel="stylesheet" href="../css/pico.min.css">
+    </link>
+
+
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="/{{config.dest}}/index">首页</a></li>
+            <li>
+                <details role="list">
+                    <summary aria-haspopup="listbox" role="button">
+                        文章
+                    </summary>
+                    <ul role="listbox">
+                        <li><a href="/{{config.dest}}/tag">标签</a></li>
+                        <li><a href="/{{config.dest}}/category">类型</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li><a href="/{{config.dest}}/about">关于</a></li>
+        </ul>
+        <ul>
+            <li><a href="/{{config.dest}}/friend">友链</a></li>
+        </ul>
+    </nav>
+    <main id="container">
+        <header>
+            <h1 align="center" id="{{props.title}}">{{props.title}}</h1>
+            <p align="center">
+                <small>
+                    <span>{{props.datetime|date(formate="%Y-%m-%d %h:%M")}} |</span>
+                </small>
+                <a href="/{{config.dest}}/category">{{props.category}} |</a>
+                {% for tag in props.tags %}
+                <a href="/{{config.dest}}/tag">{{tag}}</a>
+                {% endfor %}
+            </p>
+        </header>
+        <article>
+            {{body}}
+        </article>
+    </main>
+</body>
+
+</html>

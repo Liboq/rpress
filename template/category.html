@@ -13,7 +13,7 @@
 
 <body>
     <nav class="flex justify-between">
-        <ul>
+        <ul class="flex">
             <li><a class="p-2" href="/{{config.dest}}/index">首页</a></li>
             <li>
                 <details role="list">
@@ -33,20 +33,26 @@
         </ul>
     </nav>
     <header>
-        <h1 align="center">文章列表</h1>
+        <h1 align="center">文章类型</h1>
 
         <main id="container">
-            <ul>
-                {% for post in posts_index %}
-                <li>
-                    <a href="/{{config.dest}}/Post/{{post.url_name}}" data-tooltip="{{post.datetime|date(formate=' %Y-%m-%d
-                        %h:%M')}}| {{post.category}} | {% for tag in post.tags %} {{tag}} {% endfor
-                        %}">
-                        {{post.title}}
-                    </a>
-                </li>
-                {% endfor %}
 
+            <ul>
+                {% for category in categories %}
+                <details open>
+                    <summary>{{category}}</summary>
+                    <ul>
+                        {% for post in posts_index %}
+                        {% if post.category == category %}
+                        <li><a data-tooltip="{{post.datetime|date(formate='%Y-%m-%d%h:%M')}}| {{post.category}} | {% for tag in post.tags %} {{tag}} {% endfor %}"
+                                href='/{{config.dest}}/Post/{{post.url_name}}'> {{post.title}}
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </details>
+                {% endfor %}
             </ul>
         </main>
 

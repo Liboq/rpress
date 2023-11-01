@@ -1,5 +1,5 @@
 use rpress::{
-    config::{self, HProperty},
+    config::{self, HProperty, HpropertyString},
     parse,
 };
 use tera::Tera;
@@ -7,17 +7,33 @@ use toml;
 fn main() {
     let config_content = config::Config::get_config_content(format!("{}/config.toml", "./"));
     let path_list = parse::get_path_list(&config_content.source);
+    let mut tags = Vec::new();
+    let mut categories = Vec::new();
+    let mut posts_index = Vec::new();
     std::fs::create_dir_all(format!("{}/Post", &config_content.dest)).expect("无法创建dist");
     for p in path_list.iter() {
         if p.ends_with("markdown") || p.ends_with("md") {
             let md_config_content: HProperty =
                 toml::from_str(parse::read_markdown(p).0.as_str()).unwrap();
             let mut context = tera::Context::new();
-            context.insert("body", parse::read_markdown(p).1.as_str());
-            println!("777{}", parse::read_markdown(p).1.as_str());
-            context.insert("post_index", "6");
-            context.insert("tags", "6");
-            context.insert("categories", "6");
+            let md_all = parse::read_markdown(p);
+            let md_config: HProperty = toml::from_str(md_all.0.as_str()).unwrap();
+            let md_configs = HpropertyString::new(md_config.clone());
+            let md_content = md_all.1.as_str();
+
+            for ite in md_config.tags {
+                if !tags.contains(&ite) {
+                    tags.push(ite);
+                }
+            }
+            if !categories.contains(&md_config.category) {
+                categories.push(md_config.category)
+            }
+            posts_index.push(md_configs.clone());
+            context.insert("props", &md_configs);
+            context.insert("body", &md_content);
+            context.insert("config", &config_content);
+
             let mut tera = match Tera::new(format!("{}/{}/*.html", "./", "template").as_str()) {
                 Ok(t) => t,
                 Err(e) => {
@@ -30,13 +46,32 @@ fn main() {
                 &config_content.dest, md_config_content.url_name
             );
             tera.autoescape_on(vec!["js"]);
-            println!("{:?}", &context);
             let rendered = tera
-                .render(format!("{}.html", "index").as_str(), &context)
+                .render(format!("{}.html", "post").as_str(), &context)
                 .unwrap();
-            println!("{}", rendered);
             std::fs::write(cur_path, rendered).unwrap();
         }
+    }
+    let main_template_list = vec!["index", "friend", "tag", "category", "about"];
+    for template_name in main_template_list.iter() {
+        let mut context = tera::Context::new();
+        context.insert("posts_index", &posts_index);
+        context.insert("tags", &tags);
+        context.insert("categories", &categories);
+        context.insert("config", &config_content);
+        let mut tera = match Tera::new(format!("{}/{}/*.html", "./", "template").as_str()) {
+            Ok(t) => t,
+            Err(e) => {
+                println!("Parsing error(s): {}", e);
+                ::std::process::exit(1);
+            }
+        };
+        let cur_path = format!("./{}/{}.html", &config_content.dest, template_name);
+        tera.autoescape_on(vec!["js"]);
+        let rendered = tera
+            .render(format!("{}.html", template_name).as_str(), &context)
+            .unwrap();
+        std::fs::write(cur_path, rendered).unwrap();
     }
     println!("Hello, world!{:?}666{:?}", config_content, path_list);
 }
