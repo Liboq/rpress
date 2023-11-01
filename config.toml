@@ -1,5 +1,5 @@
 navbar=[{text ="md编写",link="/markdown/md-edit",children=[]}]
-base = "/rpress/"
+base = "./rpress"
 version = "1.0.0"
 title = "rpress"
 host = "0.0.0.0"
