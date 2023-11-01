@@ -1,11 +1,11 @@
 ---
-title= "27"
+title= "编写一个markdown-it-navbar库"
 
-datetime= 1979-05-27 07:32:00Z
+datetime= 2022-09-07 10:32:00Z
 
-category= '生活琐碎'
+category= 'vue'
 
-tags=['杂谈']
+tags=['插件',"组件"]
 
 url_name='md-edit'
 ---
