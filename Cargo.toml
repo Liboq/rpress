@@ -25,3 +25,4 @@ warp = "0.3.6"
 tokio = { version = "1.33.0", features = ["full"] }
 prettytable-rs = "0.10.0"
 markdown = "1.0.0-alpha.14"
+hotwatch="0.5.0"

@@ -1,5 +1,5 @@
 pub mod parse;
 mod init;
 pub mod config;
-mod server;
+pub mod server;
 mod builder;

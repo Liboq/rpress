@@ -25,6 +25,7 @@ pub struct Config {
     pub dest: String,
     pub navbar: Vec<Navbar>,
     pub source: String,
+    pub enviroment:String
 }
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct HpropertyString {

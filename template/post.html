@@ -13,22 +13,22 @@
     <main id="container">
         <nav>
             <ul>
-                <li><a href="/{{config.base}}/index">首页</a></li>
+                <li><a href="/{{cur_base}}/index.html">首页</a></li>
                 <li>
                     <details role="list">
                         <summary aria-haspopup="listbox" role="button">
                             文章
                         </summary>
                         <ul role="listbox">
-                            <li><a href="/{{config.base}}/tag">标签</a></li>
-                            <li><a href="/{{config.base}}/category">类型</a></li>
+                            <li><a href="/{{cur_base}}/tag.html">标签</a></li>
+                            <li><a href="/{{cur_base}}/category.html">类型</a></li>
                         </ul>
                     </details>
                 </li>
-                <li><a href="/{{config.base}}/about">关于</a></li>
+                <li><a href="/{{cur_base}}/about.html">关于</a></li>
             </ul>
             <ul>
-                <li><a href="/{{config.base}}/friend">友链</a></li>
+                <li><a href="/{{cur_base}}/friend.html">友链</a></li>
             </ul>
         </nav>
         <h1 align="center" id="{{props.title}}">{{props.title}}</h1>
@@ -36,9 +36,9 @@
             <small>
                 <span>{{props.datetime|date(formate="%Y-%m-%d %h:%M")}} |</span>
             </small>
-            <a href="/{{config.base}}/category">{{props.category}} |</a>
+            <a href="/{{cur_base}}/category.html">{{props.category}} |</a>
             {% for tag in props.tags %}
-            <a href="/{{config.base}}/tag">{{tag}}</a>
+            <a href="/{{cur_base}}/tag.html">{{tag}}</a>
             {% endfor %}
         </p>
 

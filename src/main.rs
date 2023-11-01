@@ -1,15 +1,32 @@
+use hotwatch::{self, Event, EventKind, Hotwatch};
 use rpress::{
-    config::{self, HProperty, HpropertyString},
+    config::{self, Config, HProperty, HpropertyString},
     parse,
+    server::dev,
 };
 use tera::Tera;
 use toml;
-fn main() {
+
+#[tokio::main]
+async fn main() {
     let config_content = config::Config::get_config_content(format!("{}/config.toml", "./"));
+    println!("667888812esdadasddsdsada");
+    parser(config_content.clone());
+    // runner();
+    dev(config_content).await;
+}
+fn parser(config_content: Config) {
     let path_list = parse::get_path_list(&config_content.source);
     let mut tags = Vec::new();
     let mut categories = Vec::new();
     let mut posts_index = Vec::new();
+    let mut cur_base = String::new();
+    if config_content.enviroment == "dev" {
+        cur_base = String::from(".");
+    }
+    if config_content.enviroment == "prod" {
+        cur_base = String::from(&config_content.base);
+    }
     std::fs::create_dir_all(format!("{}/Post", &config_content.dest)).expect("无法创建dist");
     for p in path_list.iter() {
         if p.ends_with("markdown") || p.ends_with("md") {
@@ -33,6 +50,7 @@ fn main() {
             context.insert("props", &md_configs);
             context.insert("body", &md_content);
             context.insert("config", &config_content);
+            context.insert("cur_base", &cur_base);
 
             let mut tera = match Tera::new(format!("{}/{}/*.html", "./", "template").as_str()) {
                 Ok(t) => t,
@@ -59,6 +77,7 @@ fn main() {
         context.insert("tags", &tags);
         context.insert("categories", &categories);
         context.insert("config", &config_content);
+        context.insert("cur_base", &cur_base);
         let mut tera = match Tera::new(format!("{}/{}/*.html", "./", "template").as_str()) {
             Ok(t) => t,
             Err(e) => {
@@ -73,5 +92,16 @@ fn main() {
             .unwrap();
         std::fs::write(cur_path, rendered).unwrap();
     }
-    println!("Hello, world!{:?}666{:?}", config_content, path_list);
+}
+
+fn runner() {
+    let mut hotwatch = Hotwatch::new().expect("hotwatch failed to initialize");
+    hotwatch
+        .watch("../../../src", |event: Event| {
+            println!("get some event {:?}",event);
+            if let EventKind::Modify(_) = event.kind {
+                println!("{:?} changed!", event.paths[0]);
+            }
+        })
+        .expect("failed to watch file!");
 }

@@ -14,22 +14,22 @@
     <main id="container">
         <nav class="flex justify-between">
             <ul class="flex">
-                <li><a class="p-2" href="/{{config.base}}/">首页</a></li>
+                <li><a class="p-2" href="/{{cur_base}}/">首页</a></li>
                 <li>
                     <details role="list">
                         <summary aria-haspopup="listbox" role="button">
                             文章
                         </summary>
                         <ul role="listbox">
-                            <li><a href="/{{config.base}}/tag">标签</a></li>
-                            <li><a href="/{{config.base}}/category">类型</a></li>
+                            <li><a href="/{{cur_base}}/tag">标签</a></li>
+                            <li><a href="/{{cur_base}}/category">类型</a></li>
                         </ul>
                     </details>
                 </li>
-                <li><a class="p-2" href="/{{config.base}}/about">关于</a></li>
+                <li><a class="p-2" href="/{{cur_base}}/about.html">关于</a></li>
             </ul>
             <ul>
-                <li><a class="p-2" href="/{{config.base}}/friend">友链</a></li>
+                <li><a class="p-2" href="/{{cur_base}}/friend">友链</a></li>
             </ul>
         </nav>
 
@@ -42,7 +42,7 @@
                     {% for post in posts_index %}
                     {% if post.tags is containing(tag) %}
                     <li><a data-tooltip="{{post.datetime|date(formate='%Y-%m-%d%h:%M')}}| {{post.category}} | {% for tag in post.tags %} {{tag}} {% endfor %}"
-                            href='/{{config.base}}/Post/{{post.url_name}}'> {{post.title}}
+                            href='/{{cur_base}}/Post/{{post.url_name}}'> {{post.title}}
                         </a>
                     </li>
                     {% endif %}
