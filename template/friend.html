@@ -6,56 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{config.title}}</title>
     <link rel="stylesheet" href="./css/pico.min.css">
-    <script src="https://giscus.app/client.js"
-        data-repo="Liboq/rpress"
-        data-repo-id="R_kgDOKmwZyA"
-        data-category="Show and tell"
-        data-category-id="DIC_kwDOKmwZyM4Cal6C"
-        data-mapping="url"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-</script>
+    <script src="https://giscus.app/client.js" data-repo="Liboq/rpress" data-repo-id="R_kgDOKmwZyA"
+        data-category="Show and tell" data-category-id="DIC_kwDOKmwZyM4Cal6C" data-mapping="url" data-strict="0"
+        data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom"
+        data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous" async>
+        </script>
 
 
 </head>
 
 <body>
-    <nav class="flex justify-between">
-        <ul class="flex">
-            <li><a class="p-2" href="/{{config.base}}/">首页</a></li>
-            <li>
-                <details role="list">
-                    <summary aria-haspopup="listbox" role="button">
-                        文章
-                    </summary>
-                    <ul role="listbox">
-                        <li><a href="/{{config.base}}/tag">标签</a></li>
-                        <li><a href="/{{config.base}}/category">类型</a></li>
-                    </ul>
-                </details>
-            </li>
-            <li><a class="p-2" href="/{{config.base}}/about">关于</a></li>
-        </ul>
-        <ul>
-            <li><a class="p-2" href="/{{config.base}}/friend">友链</a></li>
-        </ul>
-    </nav>
-    <header>
 
 
-    </header>
     <main id="container">
+        <nav class="flex justify-between">
+            <ul class="flex">
+                <li><a class="p-2" href="/{{config.base}}/">首页</a></li>
+                <li>
+                    <details role="list">
+                        <summary aria-haspopup="listbox" role="button">
+                            文章
+                        </summary>
+                        <ul role="listbox">
+                            <li><a href="/{{config.base}}/tag">标签</a></li>
+                            <li><a href="/{{config.base}}/category">类型</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li><a class="p-2" href="/{{config.base}}/about">关于</a></li>
+            </ul>
+            <ul>
+                <li><a class="p-2" href="/{{config.base}}/friend">友链</a></li>
+            </ul>
+        </nav>
         <section>
             <h1 align="center">友情链接</h1>
             <p>Github page： <a href="https://github.com/Liboq/rpress">https://github.com/Liboq/rpress</a> </p>
         </section>
+        <div id="commit">
+            <script src="https://giscus.app/client.js" data-repo="Liboq/rpress" data-repo-id="R_kgDOKmwZyA"
+                data-category="Show and tell" data-category-id="DIC_kwDOKmwZyM4Cal6C" data-mapping="url" data-strict="0"
+                data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom"
+                data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous" async>
+                </script>
+        </div>
     </main>
 
 </body>
