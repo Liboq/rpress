@@ -30,10 +30,10 @@ fn parser(config_content: Config) {
     std::fs::create_dir_all(format!("{}/Post", &config_content.dest)).expect("无法创建dist");
     for p in path_list.iter() {
         if p.ends_with("markdown") || p.ends_with("md") {
-            let md_config_content: HProperty =
-                toml::from_str(parse::read_markdown(p).0.as_str()).unwrap();
             let mut context = tera::Context::new();
             let md_all = parse::read_markdown(p);
+            let md_config_content: HProperty =
+            toml::from_str(md_all.0.as_str()).unwrap();
             let md_config: HProperty = toml::from_str(md_all.0.as_str()).unwrap();
             let md_configs = HpropertyString::new(md_config.clone());
             let md_content = md_all.1.as_str();

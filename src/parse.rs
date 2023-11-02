@@ -1,8 +1,10 @@
-// markdown 转 html
-use markdown::{ParseOptions, CompileOptions, Options};
+use std::collections::HashMap;
 
-pub fn parse_md_2_html(md: &str) -> String {
-    let html_body = markdown::to_html_with_options(
+// markdown 转 html
+use markdown::{to_html_with_options, to_mdast, CompileOptions, Options, ParseOptions};
+
+pub fn parse_md_2_html(md: &str) -> (String, HashMap<String, usize>) {
+    let html_body = to_html_with_options(
         md,
         &Options {
             parse: ParseOptions::gfm(),
@@ -15,12 +17,27 @@ pub fn parse_md_2_html(md: &str) -> String {
         },
     )
     .expect("err markdown");
-    html_body
+    let ast = to_mdast(md, &ParseOptions::default()).unwrap();
+    println!("{:?}", ast);
+    // let block_arr = tokenize(md);
+    let anchor_list = HashMap::new();
+    // for block in block_arr {
+    //     match block {
+    //         Block::Header(_text, _index) => match _text[0].clone() {
+    //             Span::Text(text) => {
+    //                 anchor_list.insert(text.clone(), _index);
+    //             }
+    //             _ => (),
+    //         },
+    //         _ => (),
+    //     }
+    // }
+    (html_body, anchor_list)
 }
 /* md 2 html
  * 我们只生成toml, body
 */
-pub fn read_markdown(md_file: &str) -> (String, String) {
+pub fn read_markdown(md_file: &str) -> (String, String, HashMap<String, usize>) {
     //println!("{}", md_file);
     let raw_text = std::fs::read_to_string(md_file).expect(md_file);
     let cut_raw: Vec<&str> = raw_text.split("---").collect();
@@ -37,9 +54,8 @@ pub fn read_markdown(md_file: &str) -> (String, String) {
     // let mut body = String::new();
     // pulldown_cmark::html::push_html(&mut body, parser);
     /*BODY is OK */
-
-    let body = parse_md_2_html(&md_text);
-    (toml_t.to_string(), body)
+    let (body, anchorlist) = parse_md_2_html(&md_text);
+    (toml_t.to_string(), body, anchorlist)
 }
 /*
 获取markdown文件列表
