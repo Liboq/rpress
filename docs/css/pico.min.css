@@ -1777,7 +1777,10 @@ pre {
   font-weight: var(--font-weight);
   line-height: initial;
 }
-code,
+code{
+  display: block;
+  padding: 0.375rem 0.5rem;
+}
 kbd {
   display: inline-block;
   padding: 0.375rem 0.5rem;
