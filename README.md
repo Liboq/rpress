@@ -7,7 +7,7 @@ rust blog
 正在进行中
 使用 rust 实现一个博客生成工具
 
-## use
+## config
 
 在`config.toml`中定义配置文件，
 
@@ -34,9 +34,18 @@ description：站点描述（暂未开发）
 source：markdown 目录
 enviroment：环境为 dev 时本地开发 可以预览`127.0.0.1:7878`,如果需要放到 github 上则需要为 prod
 
+## use
+
+终端运行如下命令
+
+```cargo
+cargo run --bin rpress
+cargo run --bin hot
+```
+
 ## feature
 
-规划中
+markdown-anchor
 
 ## reference
 

@@ -12,8 +12,11 @@ homepage = "https://github.com/liboq/rpress"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[[bin]]
+name = "hot"
+path = "src/hotrun.rs"
 [dependencies]
-tera = {version = "1.19.0", features = ["builtins"]}
+tera = { version = "1.19.0", features = ["builtins"] }
 colored = "2.0.4"
 percent-encoding = "2.3.0"
 walkdir = "2.3.3"
@@ -25,4 +28,4 @@ warp = "0.3.6"
 tokio = { version = "1.33.0", features = ["full"] }
 prettytable-rs = "0.10.0"
 markdown = "1.0.0-alpha.14"
-hotwatch="0.5.0"
+hotwatch = "0.5.0"
